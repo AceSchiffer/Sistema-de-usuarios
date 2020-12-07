@@ -54,7 +54,7 @@ def Insert():
         Database()
         #cursor.execute("INSERT INTO `member` (firstname, lastname, gender, address, username, password) VALUES(?, ?, ?, ?, ?, ?)",
         cursor.execute("INSERT INTO `estudiantes` (codigo,nombres,apellidos, genero, direccion, celular, email) VALUES(%s, %s, %s, %s, %s, %s, %s)",
-                       (str(CODIGO.get()), str(NOMBRES.get()), str(APELLIDOS.get()), str(GENERO.get()), str(DIRECCION.get()), str(CELULAR.get()), str(EMAIL.get())))
+                        (str(CODIGO.get()), str(NOMBRES.get()), str(APELLIDOS.get()), str(GENERO.get()), str(DIRECCION.get()), str(CELULAR.get()), str(EMAIL.get())))
         tree.delete(*tree.get_children())
         cursor.execute("SELECT * FROM `estudiantes` ORDER BY `apellidos` ASC")
         fetch = cursor.fetchall()
@@ -81,7 +81,7 @@ def Actualizar():
         # cursor.execute("UPDATE `estudiantes` SET `codigo` = %s WHERE `id` = %s", (str(CODIGO.get()), int(est_id)))
         
         cursor.execute("UPDATE `estudiantes` SET `codigo` = %s, `nombres` = %s, `apellidos` = %s, `genero` = %s, `direccion` = %s, `celular` = %s, `email` = %s WHERE `id` = %s",
-                       (str(CODIGO.get()), str(NOMBRES.get()), str(APELLIDOS.get()), str(GENERO.get()), str(DIRECCION.get()), str(CELULAR.get()), str(EMAIL.get()), int(est_id)))
+                        (str(CODIGO.get()), str(NOMBRES.get()), str(APELLIDOS.get()), str(GENERO.get()), str(DIRECCION.get()), str(CELULAR.get()), str(EMAIL.get()), int(est_id)))
         conn.commit()
         cursor.execute("SELECT * FROM `estudiantes` ORDER BY `apellidos` ASC")
         fetch = cursor.fetchall()
