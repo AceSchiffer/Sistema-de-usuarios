@@ -111,7 +111,7 @@ def Delete():
     if not tree.selection():
         txt_result.config(text="Please select an item first", fg="red")
     else:
-        result = tkMessageBox.askquestion('Registrar Usuários', '¿Está seguro de que desea eliminar el registro??', icon="warning")
+        result = tkMessageBox.askquestion('Registrar Usuários', '¿Está seguro de que desea eliminar el registro?', icon="warning")
         if result == 'yes':
             curItem = tree.focus()
             contents =(tree.item(curItem))

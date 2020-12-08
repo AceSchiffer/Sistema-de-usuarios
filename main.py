@@ -100,7 +100,7 @@ def Actualizar():
         btn_update.config(state=DISABLED)
         btn_delete.config(state=NORMAL)
         txt_result.config(text="El registro fue actualizado!", fg="green")
-        
+
 def OnSelected(event):
     global est_id;
     curItem = tree.focus()
@@ -126,6 +126,29 @@ def OnSelected(event):
     btn_read.config(state=DISABLED)
     btn_update.config(state=NORMAL)
     btn_delete.config(state=DISABLED)
+
+def Delete():
+    if not tree.selection():
+        txt_result.config(text="Please select an item first", fg="red")
+    else:
+        result = tkMessageBox.askquestion('Registrar Usuários', '¿Está seguro de que desea eliminar el registro?', icon="warning")
+        if result == 'yes':
+            curItem = tree.focus()
+            contents =(tree.item(curItem))
+            selecteditem = contents['values']
+            tree.delete(curItem)
+            Database()
+            cursor.execute("DELETE FROM `estudiantes` WHERE `est_id` = %d" % selecteditem[0])
+            conn.commit()
+            cursor.close()
+            conn.close()
+            txt_result.config(text="Registro excluído como sucesso", fg="black")
+
+def Exit():
+    result = tkMessageBox.askquestion('Registrar Usuários', 'Seguro que quieres Salir?', icon="warning")
+    if result == 'yes':
+        root.destroy()
+        exit()
 
 #==================================FRAME==============================================
 Top = Frame(root, width=1280, height=50, bd=1, relief="raise")
@@ -192,9 +215,9 @@ btn_read = Button(Buttons, width=10, text="Leer",)
 btn_read.pack(side=LEFT)
 btn_update = Button(Buttons, width=10, text="Actualizar" , command=Actualizar)
 btn_update.pack(side=LEFT)
-btn_delete = Button(Buttons, width=10, text="Delete",)
+btn_delete = Button(Buttons, width=10, text="Delete", command= Delete)
 btn_delete.pack(side=LEFT)
-btn_exit = Button(Buttons, width=10, text="Exit", )
+btn_exit = Button(Buttons, width=10, text="Exit", command= Exit)
 btn_exit.pack(side=LEFT)
 
 #==================================LIST WIDGET========================================
